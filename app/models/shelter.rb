@@ -17,7 +17,11 @@ class Shelter < ApplicationRecord
   end
 
   def self.order_by_reverse_alphabet
-    Shelter.find_by_sql("SELECT * FROM shelters ORDER BY name DESC")
+    find_by_sql("SELECT * FROM shelters ORDER BY name DESC")
+  end
+
+  def self.find_shelters_with_pending_applications
+    joins(pets: :petitions).where(petitions: {status: 'Pending'}).distinct
   end
 
   def pet_count

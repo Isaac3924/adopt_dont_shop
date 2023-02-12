@@ -21,6 +21,18 @@ RSpec.describe Shelter, type: :model do
     @pet_2 = @shelter_1.pets.create(name: 'Clawdia', breed: 'shorthair', age: 3, adoptable: true)
     @pet_3 = @shelter_3.pets.create(name: 'Lucille Bald', breed: 'sphynx', age: 8, adoptable: true)
     @pet_4 = @shelter_1.pets.create(name: 'Ann', breed: 'ragdoll', age: 5, adoptable: true)
+
+    @petition_1 = Petition.create!(name: 'John', street_address: '1 Sesame St', city: 'Denver',
+                    state: 'CO', zip_code: 12345, description: 'I like dogs', status: 'Pending')
+    @petition_2 = Petition.create!(name: 'Nhoj', street_address: '2 Sesame St', city: 'Renved',
+                    state: 'OC', zip_code: 54321, description: 'Dogs like I', status: 'Pending')
+    @petition_3 = Petition.create!(name: 'Bill', street_address: '2 Sesame St', city: 'Nedver',
+                    state: 'CA', zip_code: 89876, description: '', status: 'In Progress') 
+    
+    @petition_pet_1 = PetitionPet.create!(petition_id: @petition_1.id, pet_id: @pet_1.id)
+    @petition_pet_2 = PetitionPet.create!(petition_id: @petition_2.id, pet_id: @pet_2.id)
+    @petition_pet_3 = PetitionPet.create!(petition_id: @petition_3.id, pet_id: @pet_3.id)
+    @petition_pet_4 = PetitionPet.create!(petition_id: @petition_1.id, pet_id: @pet_4.id)
   end
 
   describe 'class methods' do
@@ -45,6 +57,12 @@ RSpec.describe Shelter, type: :model do
     describe '#order_by_reverse_alphabet' do
       it 'orders the shelters by number of pets they have, descending' do
         expect(Shelter.order_by_reverse_alphabet).to eq([@shelter_2, @shelter_3, @shelter_1])
+      end
+    end
+
+    describe '#find_shelters_with_pending_applications' do
+      it 'only returns the shelters with pets that have pending applications' do
+        expect(Shelter.find_shelters_with_pending_applications).to eq([@shelter_1])
       end
     end
   end
