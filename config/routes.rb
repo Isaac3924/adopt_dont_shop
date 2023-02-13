@@ -46,4 +46,6 @@ Rails.application.routes.draw do
   post '/petition_pets/:pet_id/:petition_id', to: 'petition_pets#create'
 
   get '/admin/shelters', to: 'admin_shelters#index'
+  get '/admin/petitions/:id', to: 'admin_petitions#show'
+  patch '/admin/petitions/:id/:pet_id', to: 'admin_petitions#update'
 end
