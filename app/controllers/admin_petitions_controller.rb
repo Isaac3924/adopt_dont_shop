@@ -6,6 +6,6 @@ class AdminPetitionsController < ApplicationController
   end
 
   def update
-    
+    @petition = Petition.find(params[:id])
   end
 end
