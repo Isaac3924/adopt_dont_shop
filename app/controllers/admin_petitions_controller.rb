@@ -8,13 +8,14 @@ class AdminPetitionsController < ApplicationController
   def update
     @petition = Petition.find(params[:id])
     @petition_pet = PetitionPet.find(params[:pet_id])
-    @petition_pet.update_attribute(:status, "Approved")
+    # binding.pry
+    @petition_pet.update(admin_petition_pets_params)
     redirect_to "/admin/petitions/#{@petition.id}"
   end
 
   private
 
   def admin_petition_pets_params
-    params.permit(:pet_id)
+    params.permit(:pet_id, :status)
   end
 end
