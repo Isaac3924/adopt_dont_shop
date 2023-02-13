@@ -50,7 +50,7 @@ RSpec.describe 'admin applications show page', type: :feature do
 
     it 'When I am at admin/petitions show page I see buttons to reject pets' do
       visit "/admin/petitions/#{@petition1.id}"
-
+      save_and_open_page
       expect(page).to have_button("Reject: #{@pet1.name}")
       expect(page).to have_button("Reject: #{@pet2.name}")
       expect(page).to have_button("Reject: #{@pet3.name}")
