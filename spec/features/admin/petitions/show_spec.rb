@@ -32,22 +32,47 @@ RSpec.describe 'admin applications show page', type: :feature do
       expect(page).to_not have_button("Approve: #{@pet5.name}")
     end
     
-    it 'When I click the button I arrive at admin/petitions show page' do
+    it 'When I click the approve button I arrive at admin/petitions show page' do
       visit "/admin/petitions/#{@petition1.id}"
       click_button "Approve: #{@pet1.name}"
     
       expect(page).to have_current_path("/admin/petitions/#{@petition1.id}")
     end
 
-    it 'When I click the button I arrive at a new admin show page that shows 
+    it 'When I click the approve button I arrive at a new admin show page that shows 
       that the pet has been approved and no longer has a button' do
       visit "/admin/petitions/#{@petition1.id}"
       click_button "Approve: #{@pet1.name}"
-      # binding.pry
-      # save_and_open_page
     
       expect(page).to_not have_button("Approve: #{@pet1.name}")
       expect(page).to have_content("#{@pet1.name}: Approved")
+    end
+
+    it 'When I am at admin/petitions show page I see buttons to reject pets' do
+      visit "/admin/petitions/#{@petition1.id}"
+      
+      expect(page).to have_button("Reject: #{@pet1.name}")
+      expect(page).to have_button("Reject: #{@pet2.name}")
+      expect(page).to have_button("Reject: #{@pet3.name}")
+      expect(page).to_not have_button("Reject: #{@pet4.name}")
+      expect(page).to_not have_button("Reject: #{@pet5.name}")
+    end
+    
+    it 'When I click the reject button I arrive at admin/petitions show page' do
+      visit "/admin/petitions/#{@petition1.id}"
+      click_button "Reject: #{@pet1.name}"
+      save_and_open_page
+      expect(page).to have_current_path("/admin/petitions/#{@petition1.id}")
+    end
+
+    it 'When I click the reject button I arrive at a new admin show page that shows 
+      that the pet has been rejected and no longer has a button' do
+      visit "/admin/petitions/#{@petition1.id}"
+    
+      click_button "Reject: #{@pet1.name}"
+      save_and_open_page
+      expect(page).to_not have_button("Reject: #{@pet1.name}")
+      expect(page).to have_content("#{@pet1.name}: Rejected")
     end
   end
 end

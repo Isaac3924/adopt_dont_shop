@@ -4,13 +4,20 @@
     <% @pets.each do |pet| %>
       <% @petition_pets.each do |relation| %>
         <% if relation.id == pet.id %>
-          <% if relation.status != "Approved" %>
-            <p><%= "#{pet.name}" %>: <%= button_to "Approve: #{pet.name}", "/admin/petitions/#{@petition.id}/#{pet.id}", method: :patch %></p>
-          <% elsif relation.status == "Approved" %>
-            <p><%= "#{pet.name}" %>: Approved</p>
+          <%= "#{pet.name}: " %>
+          <% if relation.status == "Approved" %>
+            <%= "Approved" %></br>
+          <% elsif relation.status == "Rejected" %>
+            <%= "Rejected" %></br>
+          <% elsif relation.status != "Approved" && relation.status != "Rejected" %>
+            <%= button_to "Approve: #{pet.name}", "/admin/petitions/#{@petition.id}/#{pet.id}", method: :patch, params:{status: "Approved"} %>
+            <%= button_to "Reject: #{pet.name}", "/admin/petitions/#{@petition.id}/#{pet.id}", method: :patch, params:{status: "Rejected"} %>
+          <% else %>
+            <p>ERROR</p>
           <% end %>
         <% end %>
       <% end %>
+      </br>
     <% end %>
   <% end %>
 <% end %>
