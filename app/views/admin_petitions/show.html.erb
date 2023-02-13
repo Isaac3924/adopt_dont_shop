@@ -1,0 +1,8 @@
+<h1>Admin Petitions Page</h1>
+<% if @petition.status != "Approved" %>
+  <% if @pets != nil %>
+    <% @pets.each do |pet| %>
+      <p><%= pet.name %>: <%= button_to "Approve: #{pet.name}", "/admin/petitions/#{@petition.id}", method: :get %></p>
+    <% end %>
+  <% end %>
+<% end %>

@@ -22,14 +22,31 @@ RSpec.describe 'admin applications show page', type: :feature do
       @petition_pet5 = PetitionPet.create!(petition_id: @petition3.id, pet_id: @pet5.id)
     end
 
-    it 'I can see the status indicator and cannot adopt another pet if the status is pending' do
-      visit "/admin/applications/#{@petition1.id}"
-      save_and_open_page
+    it 'When I am at admin/petitions show page I see buttons to approve pets' do
+      visit "/admin/petitions/#{@petition1.id}"
+
       expect(page).to have_button("Approve: #{@pet1.name}")
       expect(page).to have_button("Approve: #{@pet2.name}")
       expect(page).to have_button("Approve: #{@pet3.name}")
       expect(page).to_not have_button("Approve: #{@pet4.name}")
       expect(page).to_not have_button("Approve: #{@pet5.name}")
+    end
+    
+    it 'When I click the button I arrive at admin/petitions show page' do
+      visit "/admin/petitions/#{@petition1.id}"
+      click_button "Approve: #{@pet1.name}"
+    
+      expect(page).to have_current_path("/admin/petitions/#{@petition1.id}")
+    end
+
+    it 'When I click the button I arrive at a new admin show page that shows 
+      that the pet has been approved and no longer has a button' do
+      visit "/admin/petitions/#{@petition1.id}"
+      click_button "Approve: #{@pet1.name}"
+      save_and_open_page
+    
+      expect(page).to_not have_button("Approve: #{@pet1.name}")
+      expect(page).to have_content("#{@pet1.name}: Approved")
     end
   end
 end
