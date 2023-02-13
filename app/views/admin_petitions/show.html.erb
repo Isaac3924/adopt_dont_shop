@@ -2,7 +2,15 @@
 <% if @petition.status != "Approved" %>
   <% if @pets != nil %>
     <% @pets.each do |pet| %>
-      <p><%= pet.name %>: <%= button_to "Approve: #{pet.name}", "/admin/petitions/#{@petition.id}", method: :patch %></p>
+      <% @petition_pets.each do |relation| %>
+        <% if relation.id == pet.id %>
+          <% if relation.status != "Approved" %>
+            <p><%= "#{pet.name}" %>: <%= button_to "Approve: #{pet.name}", "/admin/petitions/#{@petition.id}/#{pet.id}", method: :patch %></p>
+          <% elsif relation.status == "Approved" %>
+            <p><%= "#{pet.name}" %>: Approved</p>
+          <% end %>
+        <% end %>
+      <% end %>
     <% end %>
   <% end %>
 <% end %>

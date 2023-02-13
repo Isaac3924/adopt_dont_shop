@@ -43,7 +43,8 @@ RSpec.describe 'admin applications show page', type: :feature do
       that the pet has been approved and no longer has a button' do
       visit "/admin/petitions/#{@petition1.id}"
       click_button "Approve: #{@pet1.name}"
-      save_and_open_page
+      # binding.pry
+      # save_and_open_page
     
       expect(page).to_not have_button("Approve: #{@pet1.name}")
       expect(page).to have_content("#{@pet1.name}: Approved")
