@@ -4,4 +4,8 @@ class AdminPetitionsController < ApplicationController
     @pets = @petition.pets
     # binding.pry
   end
+
+  def update
+    
+  end
 end
