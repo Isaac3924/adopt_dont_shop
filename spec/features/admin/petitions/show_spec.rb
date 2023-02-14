@@ -24,7 +24,8 @@ RSpec.describe 'admin applications show page', type: :feature do
 
     it 'When I am at admin/petitions show page I see buttons to approve pets' do
       visit "/admin/petitions/#{@petition1.id}"
-
+      # binding.pry
+      save_and_open_page
       expect(page).to have_button("Approve: #{@pet1.name}")
       expect(page).to have_button("Approve: #{@pet2.name}")
       expect(page).to have_button("Approve: #{@pet3.name}")
@@ -61,18 +62,21 @@ RSpec.describe 'admin applications show page', type: :feature do
     it 'When I click the reject button I arrive at admin/petitions show page' do
       visit "/admin/petitions/#{@petition1.id}"
       click_button "Reject: #{@pet1.name}"
-      save_and_open_page
+      
       expect(page).to have_current_path("/admin/petitions/#{@petition1.id}")
     end
 
     it 'When I click the reject button I arrive at a new admin show page that shows 
       that the pet has been rejected and no longer has a button' do
       visit "/admin/petitions/#{@petition1.id}"
-    
-      click_button "Reject: #{@pet1.name}"
+      # binding.pry
       save_and_open_page
-      expect(page).to_not have_button("Reject: #{@pet1.name}")
-      expect(page).to have_content("#{@pet1.name}: Rejected")
+      within ("##{@pet1.id}") do
+      click_button "Reject: #{@pet1.name}"
+      
+        expect(page).to_not have_button("Reject: #{@pet1.name}")
+        expect(page).to have_content("#{@pet1.name}: Rejected")
+      end
     end
   end
 end

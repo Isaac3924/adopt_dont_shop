@@ -2,6 +2,7 @@
 <% if @petition.status != "Approved" %>
   <% if @pets != nil %>
     <% @pets.each do |pet| %>
+    <div id = <%= "#{pet.id}" %>>
       <% @petition_pets.each do |relation| %>
         <% if relation.id == pet.id %>
           <%= "#{pet.name}: " %>
@@ -18,6 +19,7 @@
         <% end %>
       <% end %>
       </br>
+      </div>
     <% end %>
   <% end %>
 <% end %>
