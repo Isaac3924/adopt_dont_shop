@@ -4,7 +4,7 @@
     <% @pets.each do |pet| %>
     <div id = <%= "#{pet.id}" %>>
       <% @petition_pets.each do |relation| %>
-        <% if relation.id == pet.id %>
+        <% if relation.pet_id == pet.id %>
           <%= "#{pet.name}: " %>
           <% if relation.status == "Approved" %>
             <%= "Approved" %></br>

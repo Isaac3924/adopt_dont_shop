@@ -20,17 +20,27 @@ RSpec.describe 'admin applications show page', type: :feature do
       @petition_pet3 = PetitionPet.create!(petition_id: @petition1.id, pet_id: @pet3.id)
       @petition_pet4 = PetitionPet.create!(petition_id: @petition2.id, pet_id: @pet4.id)
       @petition_pet5 = PetitionPet.create!(petition_id: @petition3.id, pet_id: @pet5.id)
+      @petition_pet6 = PetitionPet.create!(petition_id: @petition2.id, pet_id: @pet1.id)
     end
 
     it 'When I am at admin/petitions show page I see buttons to approve pets' do
       visit "/admin/petitions/#{@petition1.id}"
-      # binding.pry
+
       save_and_open_page
       expect(page).to have_button("Approve: #{@pet1.name}")
       expect(page).to have_button("Approve: #{@pet2.name}")
       expect(page).to have_button("Approve: #{@pet3.name}")
       expect(page).to_not have_button("Approve: #{@pet4.name}")
       expect(page).to_not have_button("Approve: #{@pet5.name}")
+    end
+
+    it 'When I am at another admin/petitions show page I see buttons to approve pets' do
+      visit "/admin/petitions/#{@petition2.id}"
+      
+      save_and_open_page
+      expect(page).to have_button("Approve: #{@pet4.name}")
+      expect(page).to_not have_button("Approve: #{@pet5.name}")
+      expect(page).to_not have_button("Approve: #{@pet2.name}")
     end
     
     it 'When I click the approve button I arrive at admin/petitions show page' do
@@ -69,13 +79,31 @@ RSpec.describe 'admin applications show page', type: :feature do
     it 'When I click the reject button I arrive at a new admin show page that shows 
       that the pet has been rejected and no longer has a button' do
       visit "/admin/petitions/#{@petition1.id}"
-      # binding.pry
-      save_and_open_page
-      within ("##{@pet1.id}") do
-      click_button "Reject: #{@pet1.name}"
       
+      within ("##{@pet1.id}") do
+        click_button "Reject: #{@pet1.name}"
         expect(page).to_not have_button("Reject: #{@pet1.name}")
         expect(page).to have_content("#{@pet1.name}: Rejected")
+      end
+    end
+
+    it 'When I approve a pet on an admin application show page and I visit another admin
+        application show page that also has it as a relation, I do not see that the pet has
+        been accpeted, instead I see the buttons to approve or reject it.' do
+      visit "/admin/petitions/#{@petition1.id}"
+      
+      within ("##{@pet1.id}") do
+        click_button "Approve: #{@pet1.name}"
+      end
+      
+      visit "/admin/petitions/#{@petition2.id}"
+      save_and_open_page
+
+      within ("##{@pet1.id}") do
+        expect(page).to have_button("Approve: #{@pet1.name}")
+        expect(page).to have_button("Reject: #{@pet1.name}")
+        expect(page).to_not have_content("#{@pet1.name}: Approved")
+        expect(page).to_not have_content("#{@pet1.name}: Rejected")
       end
     end
   end
