@@ -40,14 +40,6 @@ RSpec.describe Pet, type: :model do
         expect(Pet.adoptable).to eq([@pet_1, @pet_2])
       end
     end
-
-    describe "#petition_status" do
-      it "returns status of application on pets" do
-        expect(Pet.petition_status(@pet_1.petitions)).to eq("Pending")
-        expect(Pet.petition_status(@pet_2.petitions)).to eq("Pending")
-        expect(Pet.petition_status(@pet_3.petitions)).to eq("In Progress")
-      end
-    end
   end
 
   describe 'instance methods' do

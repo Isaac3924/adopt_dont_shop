@@ -12,10 +12,4 @@ class Pet < ApplicationRecord
   def self.adoptable
     where(adoptable: true)
   end
-
-  def self.petition_status(petitions)
-    petitions.each do |petition|
-      return Petition.find(petition.id).status
-    end
-  end
 end
