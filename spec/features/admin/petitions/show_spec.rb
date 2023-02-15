@@ -26,7 +26,6 @@ RSpec.describe 'admin applications show page', type: :feature do
     it 'When I am at admin/petitions show page I see buttons to approve pets' do
       visit "/admin/petitions/#{@petition1.id}"
 
-      save_and_open_page
       expect(page).to have_button("Approve: #{@pet1.name}")
       expect(page).to have_button("Approve: #{@pet2.name}")
       expect(page).to have_button("Approve: #{@pet3.name}")
@@ -37,7 +36,6 @@ RSpec.describe 'admin applications show page', type: :feature do
     it 'When I am at another admin/petitions show page I see buttons to approve pets' do
       visit "/admin/petitions/#{@petition2.id}"
       
-      save_and_open_page
       expect(page).to have_button("Approve: #{@pet4.name}")
       expect(page).to_not have_button("Approve: #{@pet5.name}")
       expect(page).to_not have_button("Approve: #{@pet2.name}")
@@ -97,7 +95,6 @@ RSpec.describe 'admin applications show page', type: :feature do
       end
       
       visit "/admin/petitions/#{@petition2.id}"
-      save_and_open_page
 
       within ("##{@pet1.id}") do
         expect(page).to have_button("Approve: #{@pet1.name}")
