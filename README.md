@@ -1,11 +1,8 @@
-# Adopt, don't Shop
+# Adopt, Don't Shop
 
-This is a paired project used in Turing School's Backend Program Module 2.
+## __Turing School of Software & Design Module 2 paired project__
 
-## Learning Goals
-
-In this project, students will build upon the code in this repo to create a Pet Adoption Platform. Users will be able to apply to adopt pets, and Admins will be able to approve or reject applications and see statistics for the Shelters, Pets, and Applications in the system.
-
+### Learning Goals for Adopt, Don't Shop
 * Build out CRUD functionality for a many to many relationship
 * Use ActiveRecord to write queries that join multiple tables of data together
 * Use MVC to organize code effectively, limiting the amount of logic included in views and controllers
@@ -15,21 +12,51 @@ In this project, students will build upon the code in this repo to create a Pet 
 * Use `within` blocks in tests
 * Track user stories using GitHub Projects
 * Deploy your application to the internet
+#
 
-## Requirements
-* Project must use Rails 5.2.x, Ruby 2.7.4, and PostgreSQL
-* Use of `resources` on this project is not permitted
-* Use of scaffolding on this project is not permitted
-* Students wanting to use any extra gems on this project must first get permission from your instructors
-  * Pre-approved gems are `capybara, pry, faker, factorybot, orderly, simplecov, shoulda-matchers, launchy`
+### Contents
+1. Setup
+1. Design Strategy
+1. Application
+1. Future Goals
+1. Contributer(s)
+#
 
-## Project Phases
+### Setup 
 
-1. [Set Up](./doc/set_up.md)
-1. [User Stories](./doc/user_stories.md)
-1. [Evaluation](./doc/evaluation.md)
+In this project, we built upon the code in this repo to create a Pet Adoption Platform. Users will be able to apply to adopt pets, and Admins will be able to approve or reject applications and see statistics for the Shelters, Pets, and Applications in the system.
+#
 
-## Check In
+### Design Strategy
 
-This project will have one Check In. During your Check In, you should be prepared to review your database schema for the many to many relationship, your deployment to Heroku, and your GitHub Projects board.
+The schema diagram for this project:
+![Screenshot 2023-02-15 at 11 25 59 AM](https://user-images.githubusercontent.com/116698937/219106451-e73051b4-c506-425b-9737-6f98b2c96a14.png)
+#
 
+### Application
+
+To view this application on a web browser, you can visit our page at [Heroku](https://glacial-reaches-54903.herokuapp.com/)
+
+To run this application on a local host server, you can clone this repo to your local machine. After doing so move to the project directory and run the following commands into the command line terminal: 
+
+1. `bundle install`
+1. `rails db:{drop,create,migrate,seed}`
+1. `rails s `
+#
+
+### Future Goals
+
+Project Status: _In Progress_
+
+* Complete unfinished user stories
+* Refactor code to make use of ActiveRecord callbacks
+* Refactor code to make use of ActiveRecord Scopes
+* Implement a CSS Grid Framework to improve styling
+
+#
+### Contributer(s)
+This project was created by Isaac Alter and Harrison Ryan
+#
+githubs: 
+[Isaac Alter](https://github.com/Isaac3924)
+[Harrison Ryan](https://github.com/hwryan12)
