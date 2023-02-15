@@ -1,0 +1,15 @@
+<%= form_with url: path, method: method, local: true do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <%= f.label second_value %>
+  <%= f.text_field second_value %>
+
+  <%= f.label third_value %>
+  <%= f.check_box third_value %>
+
+  <%= f.label fourth_value %>
+  <%= f.number_field fourth_value %>
+
+  <%= f.submit %>
+<% end %>
