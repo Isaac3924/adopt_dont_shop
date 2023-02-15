@@ -7,7 +7,7 @@ class AdminPetitionsController < ApplicationController
 
   def update
     @petition = Petition.find(params[:id])
-    @petition_pet = PetitionPet.find(params[:pet_id])
+    @petition_pet = PetitionPet.find_by pet_id: params[:pet_id]
     @petition_pet.update!(admin_petition_pets_params)
     redirect_to "/admin/petitions/#{@petition.id}"
   end
