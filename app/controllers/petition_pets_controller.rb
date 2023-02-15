@@ -6,9 +6,6 @@ class PetitionPetsController < ApplicationController
     redirect_to "/petitions/#{@petition.id}"
   end
   
-  def show
-  end
-  
   private
 
   def petition_pets_attributes
